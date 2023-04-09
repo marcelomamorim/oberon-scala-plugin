@@ -1,0 +1,20 @@
+{
+  parserClass="br.com.unb.oberonpluginunb.parser.OberonParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Oberon"
+  psiImplClassSuffix="Impl"
+  psiPackage="br.com.unb.oberonpluginunb.psi"
+  psiImplPackage="br.com.unb.oberonpluginunb.psi.impl"
+
+  elementTypeHolderClass="br.com.unb.oberonpluginunb.psi.OberonTypes"
+  elementTypeClass="br.com.unb.oberonpluginunb.psi.OberonElementType"
+  tokenTypeClass="br.com.unb.oberonpluginunb.psi.OberonTokenType"
+}
+
+oberonFile ::= item_*
+
+private item_ ::= (property|COMMENT|CRLF)
+
+property ::= (KEY? SEPARATOR VALUE?) | KEY

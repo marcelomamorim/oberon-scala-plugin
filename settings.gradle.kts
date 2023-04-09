@@ -1,1 +1,1 @@
-rootProject.name = "oberon-plugin-unb"
+rootProject.name = "oberon-scala-plugin"
