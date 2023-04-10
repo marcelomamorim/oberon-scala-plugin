@@ -23,6 +23,7 @@ VALUE_CHARACTER=[^\n\f\\] | "\\"{CRLF} | "\\".
 END_OF_LINE_COMMENT=("#"|"!")[^\r\n]*
 SEPARATOR=[:=]
 KEY_CHARACTER=[^:=\ \n\t\f\\] | "\\ "
+DEC_INTEGER_LITERAL = 0 | [1-9][0-9]*
 
 %state WAITING_VALUE
 
@@ -33,6 +34,8 @@ KEY_CHARACTER=[^:=\ \n\t\f\\] | "\\ "
 <YYINITIAL> {KEY_CHARACTER}+                                { yybegin(YYINITIAL); return OberonTypes.KEY; }
 
 <YYINITIAL> {SEPARATOR}                                     { yybegin(WAITING_VALUE); return OberonTypes.SEPARATOR; }
+
+<YYINITIAL> {DEC_INTEGER_LITERAL}                           { yybegin(WAITING_VALUE); return OberonTypes.SEPARATOR; }
 
 <WAITING_VALUE> {CRLF}({CRLF}|{WHITE_SPACE})+               { yybegin(YYINITIAL); return TokenType.WHITE_SPACE; }
 
